@@ -1,0 +1,194 @@
+body {
+  font-family: "Ubuntu", "sans-serif";
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 300px;
+  height: 100%;
+}
+/************TYPOGRAPHY**********/
+nav {
+  span {
+    font-size: 3rem;
+    color: #190f53;
+  }
+  li {
+    font-size: 2rem;
+  }
+}
+
+.title-block {
+  display: flex;
+  justify-content: center;
+  h1 {
+    border-bottom: 2px solid magenta;
+    font-size: 3.5rem;
+    font-weight: 300;
+  }
+}
+
+.article-card {
+  .article-title {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  .article-meta {
+    font-size: 1rem;
+  }
+  .article-content {
+    font-size: 1.2rem;
+  }
+}
+
+/************LAYOUT**********/
+
+header {
+  margin: 0;
+  background-color: lightcyan;
+  padding: 2em 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 1em;
+      border: 2px solid magenta;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        .search-container {
+          .search {
+            width: 200px;
+            height: 2em;
+          }
+          i {
+            width: 30px;
+            padding: 0.5em;
+          }
+        }
+
+        li {
+          list-style: none;
+          margin: auto 0;
+          margin-left: 2em;
+        }
+      }
+    }
+  }
+}
+
+body {
+  margin-top: 9em;
+  background: #f1f1f1;
+
+  h1 {
+    color: #190f53;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+
+    .visz {
+      width: 20%;
+    }
+
+
+
+    .article-list {
+      width: 80%;
+      .article-card {
+        display: flex;
+        margin-bottom: 3em;
+        .article {
+          background: #f0efef;
+          padding: 1em;
+          border: 2px solid magenta;
+          margin-left: 1em;
+          .article-meta {
+            display: flex;
+            p {
+              margin-right: 3em;
+            }
+          }
+          .article-content {
+            overflow: hidden;
+            max-height: 200px;
+          }
+        }
+      }
+    }
+
+    .side-bar {
+      width: 19%;
+      padding: 0;
+      .widget {
+        h2 {
+          font-weight: 300;
+          color: #190f53;
+          font-size: 2rem;
+          margin: 0 0 1em 0;
+        }
+        ul {
+          display: flex;
+          padding: 0;
+
+          li {
+            list-style: none;
+            margin-right: 2em;
+          }
+        }
+        .DateRangePicker {
+          opacity: 1;
+          background-color: white;
+        }
+
+        border: 2px solid magenta;
+        padding: 1em;
+        margin-bottom: 2em;
+      }
+    }
+  }
+}
+
+/* ********** VISUALIZATIONS ************ */
+
+
+body {
+  .container {
+    .vizs {
+      svg {
+        g{
+          .line-path {
+            fill: none;
+          }
+          g{
+
+            .tick {
+              line {
+                opacity: 0.2;
+              }
+              }
+           
+
+          }
+          
+        } 
+        
+      }
+    }
+  }
+}
