@@ -17,6 +17,7 @@ class Example extends React.Component {
     };
   }
   onSubmit = () => {
+    console.log(this.state.value)
       this.props.handleDates([new Date(this.state.value.start._d).toJSON(), new Date(this.state.value.end._d).toJSON()])
     //   this.props.handleDates([value.end._i.toDateString(), value.start._i.toDateString()])
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import axios from "axios";
 import { addBR, lolliPopRenderSVG, lineChartRenderSVG } from "./utils.js";
 import { select, set } from "d3";
@@ -7,22 +7,55 @@ import Example from './DateRange.js'
 
 
 
+function init(initValue) {
+  return initValue
+}
+
+
+function reducer(state, action) {
+  console.log('THIS IS REDUCER', state, action)
+  switch (action.type) {
+    case 'change':
+      return {...state, inputValue: action.payload}
+    case 'SET_SENTIMENT_SCORE':
+      return {...state, sentimentScore: action.payload}
+    default:
+      throw new Error()
+  }
+  
+}
+
+
+
+
+
 const SideBar = (props) => {
+  const [input, setInput] = useState(props.inputValue)
+
+  const handleChange = (e) => {
+    setInput(e.target.value)
+  }
+  
+
   return (       
           <div className="side-bar">
           <div className="widget">
             <h2>Filter:</h2>
-            <div class="search-container">
+            <div className="search-container">
               <ul>
                 <input
                   type="text"
                   placeholder="Search.."
                   name="search"
                   className="search"
-                  value={props.inputValue}
-                  onChange={props.handleChange}
+                  value={input}
+                  onChange={handleChange}
                 />
-                <button type="submit" onClick={props.handleSubmit}>
+                <button type="submit" onClick={(e) =>{ 
+
+                  props.handleSubmit([e,input])
+                  e.preventDefault()
+                  }}>
                   <i className="fa fa-search"></i>
                 </button>
               </ul>
@@ -34,12 +67,7 @@ const SideBar = (props) => {
               <input
                 id="msft-checkbox"
                 type="checkbox"
-                onClick={() => {
-                  console.log('hello?')
-                  if(props.handleRerender)
-                  props.handleRerender()
-                  props.handleClick()
-                }}
+                onClick={props.handleClick}
               />
               <li>MSFT</li>
               <input id="tesla-checkbox" type="checkbox" />
@@ -86,11 +114,9 @@ const renderVizs = (visz, props) => {
 
 function Vizs(props) {
   const [visz, setVisz] = useState([0]);
-  const [rerender, setRerender] = useState(false);
 
 
   useEffect(() => {
-
     renderVizs(visz, props) 
     
     return () => {
@@ -102,11 +128,8 @@ function Vizs(props) {
       }
     
 
-  }, [visz, rerender]);
+  }, [visz]);
 
-  const handleRerender = () => {
-    setRerender(true)
-  }
 
   return (
     <body>
@@ -126,13 +149,14 @@ function Vizs(props) {
             );
           })}
         </div>
-        <SideBar handleRerender={handleRerender} handleDates={props.handleDates} handleSubmit={props.handleSubmit} handleChange={props.handleChange} handleClick={props.handleClick}/>
+        <SideBar inputValue={props.inputValue} handleDates={props.handleDates} handleSubmit={props.handleSubmit} handleChange={props.handleChange} handleClick={props.handleClick}/>
     </div>
    </body>
   );
 }
 
 function NewsCard(props) {
+  console.log('this is newscard props', props)
   return (
     <body>
       <div className="title-block">
@@ -165,13 +189,21 @@ function NewsCard(props) {
             </div>
           ))}
         </div>
-        <SideBar handleDates={props.handleDates} handleSubmit={props.handleSubmit} handleChange={props.handleChange} handleClick={props.handleClick}/>
+        <SideBar inputValue={props.inputValue} handleDates={props.handleDates} handleSubmit={props.handleSubmit} handleChange={props.handleChange} handleClick={props.handleClick}/>
       </div>
     </body>
   );
+
 }
 
+
+
+
 function App() {
+  
+  
+  
+  
   const [articles, setArticles] = useState([]);
   const [positiveCommonWords, setPositiveCommonWords] = useState([]);
   const [negativeCommonWords, setNegativeCommonWords] = useState([]);
@@ -183,10 +215,35 @@ function App() {
   const [search, setSearch] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [dates, setDates] = useState([])
-  const [settingDates, SetSettingDates] = useState(false)
+  const [settingDates, setSettingDates] = useState(false)
+
+  
+  const store = {
+    articles,
+    positiveCommonWords,
+    sentimentScore,
+    viz,
+    filteredData,
+    checkbox,
+    current,
+    search,
+    inputValue,
+    dates,
+    settingDates,
+    params: {}
+  }
+  const [state, dispatch] = React.useReducer(reducer, store, init)
+  
+
+  console.log('this is init outside useeffect store', state)
+  const StoreContext = React.createContext(store)
 
   useEffect(() => {
+
+    
+    
     (async () => {
+      console.log('this is state input', state)
       const url = "http://35.245.165.137:4444/graphql";
       const { data } = await axios.post(url, {
         query: `query { news { _id, title, ticker img_url, base_url, date, content, score, tokens, comparative, calculation, tokens, words, positive, negative } }`,
@@ -236,6 +293,7 @@ function App() {
       data.data.news.forEach((d) => {
         sentimentData.push({ score: +d.score, date: new Date(d.date) });
       });
+      dispatch({type: 'SET_SENTIMENT_SCORE', payload: sentimentData })
       setSentimentScore(sentimentData.slice(0, 80));
     })();
   }, []);
@@ -266,8 +324,7 @@ function App() {
   }, [checkbox]);
 
   useEffect(() => {
-    if (checkbox || inputValue || settingDates) {
-      console.log('visz activated this',filteredData);
+    if (checkbox || state.inputValue || settingDates) {
       setCurrent(filteredData);
       let freqMap = {};
       filteredData.forEach((d) => {
@@ -299,7 +356,11 @@ function App() {
       filteredData.forEach((d) => {
         sentimentData.push({ score: +d.score, date: new Date(d.date) });
       });
+      dispatch({type: 'SET_SENTIMENT_SCORE', payload: sentimentData })
       setSentimentScore(sentimentData.slice(0, 80));
+      setCheckbox(false)
+      setSettingDates(false)
+      setSearch(false)
     }
   }, [filteredData]);
 
@@ -312,8 +373,8 @@ function App() {
       query: {
         bool: {
           must: [
-            { match: { title: inputValue } },
-            { match: { content: inputValue } },
+            { match: { title: state.inputValue } },
+            { match: { content: state.inputValue } },
           ],
         },
       },
@@ -329,7 +390,6 @@ function App() {
         .then((d) => d.json())
         .then((d) => {
           setFiltereredData(d.hits.hits.map((e) => e._source));
-          console.log(d);
         });
   }, [search]);
 
@@ -361,13 +421,11 @@ function App() {
         .then((d) => d.json())
         .then((d) => {
           setFiltereredData(d.hits.hits.map((e) => e._source));
-          console.log('setting from visz',d);
         });
   }, [settingDates]);
 
 
   const handleClick = () => {
-          console.log('setting from visz');
     setCheckbox(true);
   };
 
@@ -375,18 +433,23 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = props => {
+    const [event, input] = props
+    dispatch({type: 'change', payload:input})
     setSearch(true);
     event.preventDefault();
   };
 
   const handleDates = (value) => {
     console.log(value)
-    SetSettingDates(true)
+    setSettingDates(true)
     setDates(value)
   }
 
+
+
   return (
+    <StoreContext.Provider value={store}>
     <div>
       <header>
         <nav>
@@ -409,26 +472,27 @@ function App() {
       </header>
       {viz ? (
         <Vizs
-          positiveCommonWords={positiveCommonWords}
-          negativeCommonWords={negativeCommonWords}
-          sentimentScore={sentimentScore}
-          handleDates={handleDates}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          inputValue={inputValue}
+        positiveCommonWords={positiveCommonWords}
+        negativeCommonWords={negativeCommonWords}
+        sentimentScore={state.sentimentScore}
+        handleDates={handleDates}
+        handleClick={handleClick}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        inputValue={state.inputValue}
         />
       ) : (
         <NewsCard
-          articles={current}
-          handleDates={handleDates}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          inputValue={inputValue}
+        articles={current}
+        handleDates={handleDates}
+        handleClick={handleClick}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        inputValue={state.inputValue}
         />
-      )}
+        )}
     </div>
+     </StoreContext.Provider>
   );
 }
 
