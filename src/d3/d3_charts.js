@@ -23,25 +23,25 @@ import { max, scaleLinear, scaleBand, axisLeft, axisBottom, extent, scaleTime, l
 //     }
 //     document.getElementsByClassName('content')[0].innerHTML = newt
 //   }
-export const addBR = content => {
-     let text = content.split("','").join("")
+// export const addBR = content => {
+//      let text = content.split("','").join("")
 
-    let newt = ''
-    let c= 0;
-    for (let l = 0; l < text.length; l += 1) {
-      if (text[l] === '.' && c === 4) {
-        newt += '<br><br>'
-        c = 0
-      }
-      else if (text[l] === '.') {
-        c += 1
-        newt += text[l]
-      }
-      else newt += text[l]
-    }
-    text = newt
-    return text
-  }
+//     let newt = ''
+//     let c= 0;
+//     for (let l = 0; l < text.length; l += 1) {
+//       if (text[l] === '.' && c === 4) {
+//         newt += '<br><br>'
+//         c = 0
+//       }
+//       else if (text[l] === '.') {
+//         c += 1
+//         newt += text[l]
+//       }
+//       else newt += text[l]
+//     }
+//     text = newt
+//     return text
+//   }
 
 
 export const lolliPopRenderSVG = (title, data, svg, width, height) => {
@@ -52,7 +52,7 @@ export const lolliPopRenderSVG = (title, data, svg, width, height) => {
 
     const xValue = d => d.freq;
     const yValue = d => d.word;
-    const margin = {left: 150, top: 50, right: 50, bottom: 50}
+    const margin = {left: 80, top: 50, right: 50, bottom: 80}
     const innerWidth = width - margin.left - margin.right
     const innerHeight = height - margin.top - margin.bottom
 
@@ -127,12 +127,12 @@ export const lineChartRenderSVG = (data, svg, width, height) => {
     const yLabel = 'Sentiment Score'
     const xLabel = 'Date'
 
-    const title =  `MSFT News Sentiment`
+    const title =  `News Sentiment`
 
     const xValue = d => d.date;
     const yValue = d => d.score;
     const circleRadius = 2;
-    const margin = {left: 150, top: 60, right: 50, bottom: 90}
+    const margin = {left: 80, top: 50, right: 50, bottom: 80}
     const innerWidth = width - margin.left - margin.right
     const innerHeight = height - margin.top - margin.bottom
 
