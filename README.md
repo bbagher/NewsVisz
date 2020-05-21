@@ -1,6 +1,6 @@
 ## Example
-![](Example.mp4)
-<iframe src="https://giphy.com/embed/hqmVOf9JyfR3pFYyGk" width="480" height="302" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hqmVOf9JyfR3pFYyGk">via GIPHY</a></p>
+![](exampel.gif)
+
 ## Available Scripts
 
 In the project directory, you can run:
