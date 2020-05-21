@@ -34,15 +34,16 @@ export const getSearchArticles = (input) => {
 };
 
 export const getBetweenDatesArticles = (dates) => {
-  return {
+  console.log(dates)
+  return dates && {
     from: 0,
     size: 40,
     query: {
       range: {
         date: {
           time_zone: "+01:00",
-          gte: dates[0],
-          lte: dates[1],
+          gte: new Date(dates.start._d).toJSON() ,
+          lte: new Date(dates.end._d).toJSON()
         },
       },
     },

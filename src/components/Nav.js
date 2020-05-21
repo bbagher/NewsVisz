@@ -6,7 +6,7 @@ export default function Nav(props) {
   return (
     <header>
       <nav>
-        <div class="header-container">
+        <div className="header-container">
           <span>
             <a className="logo" onClick={() => setRoute(false)}>
               NEWSVIZS

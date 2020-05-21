@@ -184,10 +184,13 @@ body {
   header {
     width: 100%;
     margin: 0;
+    display: flex;
+    justify-content: center;
     nav {
-      max-width: 320px;
       margin: 0;
-      text-align: center;
+      text-anchor: center;
+      max-width: 320px;
+
       .header-container {
         flex-direction: column;
 
@@ -207,6 +210,7 @@ body {
 
   body {
     margin-top: 12em;
+      max-width: 320px;
     .body-container {
       flex-direction: column-reverse;
       max-width: 430px;
@@ -214,10 +218,22 @@ body {
         width: 100%;
         .article-card {
           flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .article{
+            margin:0;
+            padding: 0;
+            .article-content{
+              max-height: 100px;
+            }
+          }
         }
       }
       .side-bar {
         width: 100%;
+        .widget{
+          padding: 0 2em;
+        }
       }
     }
   }
@@ -230,7 +246,7 @@ body {
 }
 @media (orientation: portrait) {
   header {
-    width: 100vh;
+    width: 100vw;
   }
 }
 

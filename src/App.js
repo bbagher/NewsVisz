@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Vizs from "./Components/Vizs.js";
-import NewsCard from "./Components/NewsCard.js";
-import Nav from "./Components/Nav.js";
+import Vizs from "./components/Vizs.js";
+import NewsCard from "./components/NewsCard.js";
+import Nav from "./components/Nav.js";
 import { countWords, getDataPair } from "./utils/utils.js";
 import { useFetch } from "./utils/hooks.js";
 import {
@@ -13,11 +13,15 @@ import {
 } from "./es/es_params.js";
 import "./App.scss";
 
+
+
 function App() {
+
+
   const [currentData, setCurrentData] = useState([]);
   const [route, setRoute] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
-  const [dates, setDates] = useState([]);
+  const [dates, setDates] = useState();
   const [searchInput, setSearchInput] = useState("");
   const [sentimentScore, setSentimentScore] = useState([]);
   const [positiveCommonWords, setPositiveCommonWords] = useState([]);
@@ -63,7 +67,7 @@ function App() {
       <div>
         {route ? (
           <Vizs
-            positiveCommonWords={positiveCommonWords}
+          positiveCommonWords={positiveCommonWords}
             negativeCommonWords={negativeCommonWords}
             sentimentScore={sentimentScore}
             handleDates={handleDates}
@@ -72,19 +76,19 @@ function App() {
             handleChange={handleChange}
             searchInput={searchInput}
             checkbox={checkbox}
-          />
-        ) : (
-          <NewsCard
-            dates={dates}
-            checkbox={checkbox}
-            articles={currentData}
-            handleDates={handleDates}
-            handleClick={handleClick}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            searchInput={searchInput}
-          />
-        )}
+            />
+            ) : (
+              <NewsCard
+              dates={dates}
+              checkbox={checkbox}
+              articles={currentData}
+              handleDates={handleDates}
+              handleClick={handleClick}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              searchInput={searchInput}
+              />
+              )}
       </div>
     </StoreContext.Provider>
   );

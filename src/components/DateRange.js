@@ -4,18 +4,13 @@ import "react-daterange-picker/dist/css/react-calendar.css";
 
 const Example = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState();
-
+  const [value, setValue] = useState(props.dates);
 
   const onSubmit = (e) => {
-  
-      value && props.handleDates([
-        new Date(value.start._d).toJSON(),
-        new Date(value.end._d).toJSON(),
-      ]);
-    
     e.preventDefault();
-    
+
+    value &&
+      props.handleDates(value);
   };
 
   const onSelect = (value) => {
@@ -52,13 +47,14 @@ const Example = (props) => {
             singleDateRange={true}
           />
         )}
-        {!isOpen && <button type="submit" onClick={onSubmit}>
-          <i className="fa fa-search"></i>
-        </button>}
+        {!isOpen && (
+          <button type="submit" onClick={onSubmit}>
+            <i className="fa fa-search"></i>
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
 export default Example;
-

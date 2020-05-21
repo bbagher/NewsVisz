@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Example from "./DateRange.js";
+
+
 
 export const SideBar = (props) => {
   const [input, setInput] = useState(props.inputValues);
@@ -50,8 +52,9 @@ export const SideBar = (props) => {
               className="checkbox"
               type="checkbox"
               onClick={(e) => {
-                console.log("CLICKING CHECKBOX", checkbox);
+                e.preventDefault()
                 props.handleClick(checkbox ? false : true);
+
               }}
             />
           </label>
