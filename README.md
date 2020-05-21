@@ -1,5 +1,5 @@
 ## Example
-![](exampel.gif)
+![](example.gif)
 
 ## Available Scripts
 
