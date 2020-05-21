@@ -32,7 +32,7 @@ function App() {
   const StoreContext = React.createContext(store);
 
   useFetch(url, getAllArticles, setCurrentData);
-  useFetch(url, getWatchlistArticles("tsla"), setCurrentData, checkbox);
+  useFetch(url, getWatchlistArticles("msft"), setCurrentData, checkbox);
   useFetch(url, getSearchArticles(searchInput), setCurrentData, searchInput);
   useFetch(url, getBetweenDatesArticles(dates), setCurrentData, dates);
 
@@ -67,7 +67,7 @@ function App() {
       <div>
         {route ? (
           <Vizs
-          positiveCommonWords={positiveCommonWords}
+            positiveCommonWords={positiveCommonWords}
             negativeCommonWords={negativeCommonWords}
             sentimentScore={sentimentScore}
             handleDates={handleDates}
@@ -76,6 +76,7 @@ function App() {
             handleChange={handleChange}
             searchInput={searchInput}
             checkbox={checkbox}
+            dates={dates}
             />
             ) : (
               <NewsCard

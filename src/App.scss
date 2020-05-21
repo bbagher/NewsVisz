@@ -105,22 +105,24 @@ header {
 body {
   margin-top: 9em;
   background: #f1f1f1;
-
-  h1 {
-    color: #190f53;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .body-container {
-    display: flex;
+  
+  .main {
+    
+    h1 {
+      color: #190f53;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .body-container {
+      display: flex;
     justify-content: space-between;
     max-width: 1280px;
     margin: 0 auto;
-
+    
     .visz {
       width: 20%;
     }
-
+    
     .article-list {
       width: 80%;
       .article-card {
@@ -144,6 +146,7 @@ body {
         }
       }
     }
+  }
 
     .side-bar {
       width: 19%;
@@ -213,6 +216,7 @@ body {
       max-width: 320px;
     .body-container {
       flex-direction: column-reverse;
+      align-items: center;
       max-width: 430px;
       .article-list {
         width: 100%;

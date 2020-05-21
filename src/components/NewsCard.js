@@ -3,7 +3,7 @@ import { SideBar } from "./SideBar.js";
 
 export default function NewsCard(props) {
   return (
-    <body>
+    <div className="main">
       <div className="title-block">
         <h1>Feednews</h1>
       </div>
@@ -49,6 +49,6 @@ export default function NewsCard(props) {
           handleClick={props.handleClick}
         />
       </div>
-    </body>
+    </div>
   );
 }
