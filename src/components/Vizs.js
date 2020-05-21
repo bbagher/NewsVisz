@@ -22,8 +22,7 @@ export default function Vizs(props) {
   }, [visz]);
 
   return (
-    <body>
-      t
+    <div className="main">
       <div className="title-block">
         <h1>Visualizations</h1>
       </div>
@@ -40,6 +39,7 @@ export default function Vizs(props) {
           })}
         </div>
         <SideBar
+          dates={props.dates}
           checkbox={props.checkbox}
           searchInput={props.searchInput}
           handleDates={props.handleDates}
@@ -48,6 +48,6 @@ export default function Vizs(props) {
           handleClick={props.handleClick}
         />
       </div>
-    </body>
+    </div>
   );
 }
