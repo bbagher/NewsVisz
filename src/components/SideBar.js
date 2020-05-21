@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Example from "./DateRange.js";
+import DateRange from "./DateRange.js";
 
 
 
@@ -65,7 +65,7 @@ export const SideBar = (props) => {
       </div>
       <div className="widget">
         <h2>Date Range:</h2>
-        <Example dates={props.dates} handleDates={props.handleDates} />
+        <DateRange dates={props.dates} handleDates={props.handleDates} />
       </div>
     </div>
   );

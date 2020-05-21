@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DateRangePicker from "react-daterange-picker";
 import "react-daterange-picker/dist/css/react-calendar.css";
 
-const Example = (props) => {
+const DateRange = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState(props.dates);
 
@@ -57,4 +57,4 @@ const Example = (props) => {
   );
 };
 
-export default Example;
+export default DateRange;
