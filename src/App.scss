@@ -1,3 +1,12 @@
+$primary-color: #190f53;
+$secondary-color: white;
+$background-color: rgb(246, 246, 246);
+$border-style: 2px solid magenta;
+$box-shadow:-0.2em 0.2em 0.2em rgba(255, 0, 255, 0.219);
+$box-shadow-light-bg: 0em 0.06em 0em rgba(255, 0, 255, 0.219);
+$box-shadow-light-sm: 0em 0.1em 0em rgba(255, 0, 255, 0.219);
+$background-fill: url("./dot-grid.png") repeat;
+
 body {
   font-family: "Ubuntu", "sans-serif";
   margin: 0;
@@ -8,14 +17,14 @@ body:hover {
 }
 
 img {
-  width: 300px;
+  width: 320px;
   height: 100%;
 }
 /************   TYPOGRAPHY   **********/
 nav {
   span {
     font-size: 3rem;
-    color: #190f53;
+    color: $primary-color;
   }
   li {
     font-size: 2rem;
@@ -26,9 +35,10 @@ nav {
   display: flex;
   justify-content: center;
   h1 {
-    border-bottom: 2px solid magenta;
+    border-bottom: $border-style; 
     font-size: 3.5rem;
     font-weight: 300;
+    box-shadow: $box-shadow-light-bg;
   }
 }
 
@@ -46,9 +56,10 @@ nav {
 }
 .side-bar {
   .widget {
+    background: $background-color;
     h2 {
       font-weight: 300;
-      color: #190f53;
+      color: $primary-color;
       font-size: 2rem;
     }
   }
@@ -64,12 +75,14 @@ nav {
 
 header {
   margin: 0;
-  background-color: lightcyan;
+  // background-color: lightcyan;
   padding: 2em 0;
   position: fixed;
   top: 0;
-
+  
   nav {
+    background-color: $background-color;
+    opacity: 1;
     max-width: 1280px;
     margin: 0 auto;
     .header-container {
@@ -77,18 +90,21 @@ header {
       justify-content: space-between;
       padding: 1em;
       border: 2px solid magenta;
+      box-shadow: $box-shadow; 
 
       ul {
-        margin: 0;
         padding: 0;
         display: flex;
+        margin: 0;
 
         li {
           list-style: none;
           margin: auto 0;
           margin-left: 2em;
+          margin-right: 0.5em;
           .current-route {
-            border-bottom: 2px solid magenta;
+            box-shadow: $box-shadow-light-sm;
+            border-bottom: $border-style;
           }
           div:hover {
             cursor: pointer;
@@ -103,81 +119,87 @@ header {
 }
 
 body {
-  margin-top: 9em;
-  background: #f1f1f1;
-  
-  .main {
-    
-    h1 {
-      color: #190f53;
-      text-align: center;
-      margin-bottom: 1em;
-    }
-    .body-container {
-      display: flex;
-    justify-content: space-between;
-    max-width: 1280px;
-    margin: 0 auto;
-    
-    .visz {
-      width: 20%;
-    }
-    
-    .article-list {
-      width: 80%;
-      .article-card {
+  margin-top: 8em;
+  background: $background-color;
+  background: $background-fill;
+  main {
+    display: flex;
+    justify-content: center;
+    .main {
+      display: inline-block;
+      h1 {
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 1em;
+      }
+      .body-container {
         display: flex;
-        margin-bottom: 3em;
-        .article {
-          background: #f0efef;
-          padding: 1em;
-          border: 2px solid magenta;
-          margin-left: 1em;
-          .article-meta {
+        justify-content: space-between;
+        max-width: 1280px;
+        margin: 0 auto;
+
+        .visz {
+          width: 20%;
+        }
+
+        .article-list {
+          width: 80%;
+          .article-card {
             display: flex;
-            p {
-              margin-right: 3em;
+            margin-bottom: 3em;
+            .article {
+              padding: 1em;
+              border: $border-style;
+    background: $background-color;
+              box-shadow: $box-shadow;
+              margin-left: 1em;
+              .article-meta {
+                display: flex;
+                p {
+                  margin-right: 3em;
+                }
+              }
+              .article-content {
+                overflow: hidden;
+                max-height: 200px;
+              }
             }
-          }
-          .article-content {
-            overflow: hidden;
-            max-height: 200px;
           }
         }
       }
-    }
-  }
 
-    .side-bar {
-      width: 19%;
-      padding: 0;
-      .widget {
-        h2 {
-          margin: 0 0 1em 0;
-        }
-        ul {
-          display: flex;
-          padding: 0;
-
-          li {
-            list-style: none;
-            margin-right: 2em;
+      .side-bar {
+        width: 19%;
+        padding: 0;
+        .widget {
+          h2 {
+            margin: 0 0 1em 0;
           }
-        }
-        .DateRangePicker {
-          opacity: 1;
-          background-color: white;
-        }
-
-        div {
-          .small-container {
+          ul {
             display: flex;
-          }
-        }
+            padding: 0;
 
-        border: 2px solid magenta;
-        padding: 1em;
-        margin-bottom: 2em;
+            li {
+              list-style: none;
+              margin-right: 2em;
+            }
+          }
+          .DateRangePicker {
+            opacity: 1;
+            background-color: $secondary-color;
+          }
+
+          div {
+            .small-container {
+              display: flex;
+            }
+          }
+
+          border: $border-style;
+          box-shadow: $box-shadow;
+          padding: 1em;
+          margin-bottom: 2em;
+        }
       }
     }
   }
@@ -186,15 +208,13 @@ body {
 @media (max-width: 475px) {
   header {
     width: 100%;
-    margin: 0;
-    display: flex;
     justify-content: center;
     nav {
       margin: 0;
-      text-anchor: center;
-      max-width: 320px;
-
+      display: flex;
+      justify-content: center;
       .header-container {
+        width: 280px;
         flex-direction: column;
 
         span {
@@ -212,31 +232,29 @@ body {
   }
 
   body {
-    margin-top: 12em;
-      max-width: 320px;
-    .body-container {
-      flex-direction: column-reverse;
-      align-items: center;
-      max-width: 430px;
-      .article-list {
-        width: 100%;
-        .article-card {
-          flex-direction: column;
-          justify-content: center;
+    margin-top: 10em;
+    main {
+      .main {
+        .body-container {
+          max-width: 320px;
+          flex-direction: column-reverse;
           align-items: center;
-          .article{
-            margin:0;
-            padding: 0;
-            .article-content{
-              max-height: 100px;
+          .article-list {
+            width: 100%;
+            .article-card {
+              flex-direction: column;
+              .article {
+                margin: 0;
+                padding: 1.5em;
+              }
             }
           }
         }
-      }
-      .side-bar {
-        width: 100%;
-        .widget{
-          padding: 0 2em;
+        .side-bar {
+          max-width: 300px;
+          width: 100%;
+          .widget {
+          }
         }
       }
     }

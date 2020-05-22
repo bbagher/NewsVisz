@@ -22,6 +22,8 @@ export default function Vizs(props) {
   }, [visz]);
 
   return (
+    <main>
+
     <div className="main">
       <div className="title-block">
         <h1>Visualizations</h1>
@@ -46,8 +48,9 @@ export default function Vizs(props) {
           handleSubmit={props.handleSubmit}
           handleChange={props.handleChange}
           handleClick={props.handleClick}
-        />
+          />
       </div>
     </div>
+          </main>
   );
 }

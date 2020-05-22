@@ -3,6 +3,8 @@ import { SideBar } from "./SideBar.js";
 
 export default function NewsCard(props) {
   return (
+    <main>
+
     <div className="main">
       <div className="title-block">
         <h1>Feednews</h1>
@@ -22,9 +24,9 @@ export default function NewsCard(props) {
                     "//s3.reutersmedia.net/resources/r/?m=02&d=20200227&t=2&i=1495838996&r=LYNXNPEG1Q0EJ&w=500"
                   }
                 />
-              ) : (
+                ) : (
                 <img
-                  src={d.img_url.substring(0, d.img_url.length - 3) + "=500"}
+                src={d.img_url.substring(0, d.img_url.length - 3) + "=500"}
                 />
               )}
               <div className="article">
@@ -47,8 +49,9 @@ export default function NewsCard(props) {
           handleSubmit={props.handleSubmit}
           handleChange={props.handleChange}
           handleClick={props.handleClick}
-        />
+          />
       </div>
     </div>
+          </main>
   );
 }
