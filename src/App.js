@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Vizs from "./components/Vizs.js";
+import React, { useState } from "react";
+import Visz from "./components/Visz.js";
 import NewsCard from "./components/NewsCard.js";
 import Nav from "./components/Nav.js";
 import { countWords, getDataPair } from "./utils/utils.js";
@@ -17,7 +17,6 @@ import "./App.scss";
 
 function App() {
 
-
   const [currentData, setCurrentData] = useState([]);
   const [route, setRoute] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
@@ -26,21 +25,20 @@ function App() {
   const [sentimentScore, setSentimentScore] = useState([]);
   const [positiveCommonWords, setPositiveCommonWords] = useState([]);
   const [negativeCommonWords, setNegativeCommonWords] = useState([]);
+  
+  const passData = (d) => {
+    const data = d.hits.hits.map((e) => e._source)
+    setCurrentData(data) 
+    setPositiveCommonWords(countWords(data , "positive").slice(0, 20));
+    setNegativeCommonWords(countWords(data , "negative").slice(0, 20));
+    setSentimentScore(getDataPair(data, "score", "date").slice(0, 80));
+  } 
 
-  const store = {};
+  useFetch(url, getAllArticles, passData);
+  useFetch(url, getWatchlistArticles("msft"), passData, checkbox);
+  useFetch(url, getSearchArticles(searchInput), passData, searchInput);
+  useFetch(url, getBetweenDatesArticles(dates), passData, dates);
 
-  const StoreContext = React.createContext(store);
-
-  useFetch(url, getAllArticles, setCurrentData);
-  useFetch(url, getWatchlistArticles("msft"), setCurrentData, checkbox);
-  useFetch(url, getSearchArticles(searchInput), setCurrentData, searchInput);
-  useFetch(url, getBetweenDatesArticles(dates), setCurrentData, dates);
-
-  useEffect(() => {
-    setPositiveCommonWords(countWords(currentData, "positive").slice(0, 20));
-    setNegativeCommonWords(countWords(currentData, "negative").slice(0, 20));
-    setSentimentScore(getDataPair(currentData, "score", "date").slice(0, 80));
-  }, [currentData]);
 
   const handleClick = (value) => {
     setCheckbox(value);
@@ -50,23 +48,19 @@ function App() {
     setSearchInput(event.target.value);
   };
 
-  const handleSubmit = (props) => {
-    const [event, input] = props;
+  const handleSubmit = (input) => {
     setSearchInput(input);
-    event.preventDefault();
   };
 
   const handleDates = (value) => {
-    console.log(value);
     setDates(value);
   };
 
   return (
-    <StoreContext.Provider>
-      <Nav route={route} setRoute={setRoute} />
       <div>
+      <Nav route={route} setRoute={setRoute} />
         {route ? (
-          <Vizs
+          <Visz
             positiveCommonWords={positiveCommonWords}
             negativeCommonWords={negativeCommonWords}
             sentimentScore={sentimentScore}
@@ -91,7 +85,6 @@ function App() {
               />
               )}
       </div>
-    </StoreContext.Provider>
   );
 }
 

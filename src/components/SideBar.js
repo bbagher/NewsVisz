@@ -1,22 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import DateRange from "./DateRange.js";
 
-
-
 export const SideBar = (props) => {
-  const [input, setInput] = useState(props.inputValues);
-  const [checkbox, setCheckbox] = useState(props.checkbox);
+  const [input, setInput] = useState(props.searchInput);
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
-
-  useEffect(() => {
-    if (checkbox)
-      document
-        .getElementsByClassName("checkbox")[0]
-        .setAttribute("checked", "true");
-  }, [checkbox]);
 
   return (
     <div className="side-bar">
@@ -31,14 +21,14 @@ export const SideBar = (props) => {
               className="search"
               value={input}
               onChange={handleChange}
-            />
+              />
             <button
               type="submit"
               onClick={(e) => {
-                props.handleSubmit([e, input]);
+                props.handleSubmit(input);
                 e.preventDefault();
               }}
-            >
+              >
               <i className="fa fa-search"></i>
             </button>
           </ul>
@@ -51,12 +41,11 @@ export const SideBar = (props) => {
             <input
               className="checkbox"
               type="checkbox"
-              onClick={(e) => {
-                e.preventDefault()
-                props.handleClick(checkbox ? false : true);
-
+              checked={props.checkbox}
+              onClick={() => {
+                props.handleClick(!props.checkbox);
               }}
-            />
+              />
           </label>
           <li>MSFT</li>
           <input id="tesla-checkbox" type="checkbox" />

@@ -34,7 +34,6 @@ export const getSearchArticles = (input) => {
 };
 
 export const getBetweenDatesArticles = (dates) => {
-  console.log(dates)
   return dates && {
     from: 0,
     size: 40,

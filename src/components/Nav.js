@@ -9,7 +9,7 @@ export default function Nav(props) {
         <div className="header-container">
           <span>
             <a className="logo" onClick={() => setRoute(false)}>
-              NEWSVIZS
+              NEWSVISZ
             </a>
           </span>
           <ul>
@@ -20,7 +20,7 @@ export default function Nav(props) {
             </li>
             <li>
               <div className={route ? "current-route" : ""}>
-                <a onClick={() => setRoute(true)}>Vizs</a>
+                <a onClick={() => setRoute(true)}>Visz</a>
               </div>
             </li>
           </ul>

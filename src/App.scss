@@ -253,8 +253,6 @@ body {
         .side-bar {
           max-width: 300px;
           width: 100%;
-          .widget {
-          }
         }
       }
     }
@@ -266,11 +264,11 @@ body {
     width: 100vw;
   }
 }
-@media (orientation: portrait) {
-  header {
-    width: 100vw;
-  }
-}
+// @media (orientation: portrait) {
+//   header {
+//     width: 100vw;
+//   }
+// }
 
 /* ********** VISUALIZATIONS ************ */
 
@@ -278,7 +276,7 @@ body {
   .body-container {
     display: flex;
     justify-content: space-between;
-    .vizs {
+    .visz {
       svg {
         g {
           .line-path {

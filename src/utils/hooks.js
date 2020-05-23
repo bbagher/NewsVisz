@@ -10,8 +10,7 @@ export const useFetch = (url, params, setter, state = true) => {
       })
         .then((d) => d.json())
         .then((d) => {
-          console.log('hits', d)
-          !d.error && setter(d.hits.hits.map((e) => e._source));
+          !d.error && setter(d);
         });
   }, [state]);
 };
