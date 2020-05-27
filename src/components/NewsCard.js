@@ -9,13 +9,13 @@ export default function NewsCard(props) {
       <div className="title-block">
         <h1>Feednews</h1>
       </div>
-      {!props.articles[0] && (
-        <h2 style={{ display: "flex", "justify-content": "center" }}>
-          No articles found!
-        </h2>
-      )}
       <div className="body-container">
         <div className="article-list">
+          {!props.articles[0] && (
+            <h2 style={{ display: "flex", "justify-content": "center" }}>
+              No articles found!
+            </h2>
+          )}
           {props.articles.map((d) => (
             <div className="article-card">
               {d.img_url === "null" ? (
