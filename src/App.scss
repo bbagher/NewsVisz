@@ -179,11 +179,8 @@ body {
           h2 {
             margin: 0 0 1em 0;
           }
-          ul {
-            display: flex;
-            padding: 0;
-
-            li {
+          form {
+            label {
               list-style: none;
               margin-right: 2em;
             }
