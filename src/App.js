@@ -3,7 +3,7 @@ import Visz from "./components/Visz.js";
 import NewsCard from "./components/NewsCard.js";
 import Nav from "./components/Nav.js";
 import { countWords, getDataPair } from "./utils/utils.js";
-import { useFetch } from "./utils/hooks.js";
+import { useFetch } from "./hooks/hooks.js";
 import {
   url,
   getAllArticles,
@@ -17,6 +17,7 @@ import "./App.scss";
 
 function App() {
 
+  
   const [currentData, setCurrentData] = useState([]);
   const [route, setRoute] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
